@@ -58,7 +58,7 @@ class PdoAdapter extends PDO
         }
 
         if ($isolationLevel === null) {
-            $r = $this->exec('SET TRANSACTION');
+            $r = $this->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED WAIT');
             $success = ($r !== false);
             if ($success) {
                 $this->_inTransaction = true;
