@@ -48,22 +48,13 @@ class PdoAdapter extends PDO
      * Initiates a transaction
      * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
      */
-    public function beginTransaction($isolationLevel = null)
+    public function beginTransaction($isolationLevel = "READ COMMITTED WAIT")
     {
         $this->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
 
         if ($isolationLevel === false) {
             $this->_inTransaction = true;
             return true;
-        }
-
-        if ($isolationLevel === null) {
-            $r = $this->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED WAIT');
-            $success = ($r !== false);
-            if ($success) {
-                $this->_inTransaction = true;
-            }
-            return ($success);
         }
 
         $r = $this->exec("SET TRANSACTION ISOLATION LEVEL $isolationLevel");
