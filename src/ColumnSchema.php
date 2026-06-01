@@ -75,9 +75,9 @@ class ColumnSchema extends \yii\db\ColumnSchema
                 }
                 return (int) $value;
             case 'boolean':
-                return (boolean) $value;
+                return (bool) $value;
             case 'double':
-                return (double) $value;
+                return (float) $value;
         }
 
         return $value;
