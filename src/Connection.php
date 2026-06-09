@@ -18,6 +18,15 @@ class Connection extends \yii\db\Connection
      * Firebird server version
      */
     public $firebird_version = null;
+
+    /**
+     * @var bool Whether to strip unused parameters before query execution.
+     * Enable for PHP 8.5+ compatibility, where PDO throws an error
+     * when binding parameters that are missing in SQL.
+     * Works only for createCommand() queries (not ActiveRecord).
+     * Removed parameters are logged to runtime/logs/unused-params.log
+     */
+    public $stripUnusedParams = false;
     
     /**
      * @inheritdoc
